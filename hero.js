@@ -11,7 +11,6 @@ class Hero {
     this.dx = 0
     this.dy = 0
     this.airborne = true
-    scroll = 0
   }
   moveLeft() {
     // this.dx = this.dx - (gridSize * 1/10)
@@ -53,35 +52,19 @@ class Hero {
 
     platforms.forEach(platform => {
       if (platform.isAbove(this.x - this.dx, this.y - this.dy + gridSize) && platform.contains(this.x, this.y) && this.dy > 0) {
+        console.log("colide")
         this.y = platform.y
         this.dy = 0
         this.airborne = false
         hitP = true
       } else if (platform.isAbove(this.x - this.dx, this.y - this.dy + gridSize) && (this.dy === 0)) {
+        console.log("colide")
         hitP = true
       }
     })
-
-    platforms.forEach(platform => {
-      if (platform.isBellow(this.x - this.dx, this.y - this.dy - gridSize) && platform.contains(this.x, this.y) && this.dy != 0) {
-        console.log("colide" + this.dy)
-        console.log(platform.isBellow(this.x - this.dx, this.y - this.dy - gridSize))
-        console.log(platform.contains(this.x, this.y))
-        console.log(this.dy != 0)
-        console.log(this.x + "," + this.y)
-        this.y = platform.y + gridSize
-        this.dy = 1/60 * gridSize
-        this.airborne = true
-      }
-    })
-
     if (!hitP) {
       this.airborne = true
       this.dy += 1/60 * gridSize
-    }
-
-    if (this.x > canvas.width / 2) {
-      scroll = this.x - canvas.width / 2
     }
   }
 
@@ -90,12 +73,7 @@ class Hero {
     let image = heroStandSprite.image
     if (Math.abs(this.dx) > 0.1) {
       // we know the hero is moving
-      let frame = Math.floor(this.x / gridSize)
-      if (frame % 2 === 1) {
-        image = heroWalkSprite1.image
-      } else if (frame % 2 === 0) {
-        image = heroWalkSprite2.image
-      }
+      image = heroWalkSprite1.image
     }
     if (this.airborne) { // same as if (this.airborne === true)
       // we know the hero is in the air already
@@ -103,12 +81,12 @@ class Hero {
     }
     
     // todo draw the sprite
-    ctx.drawImage(image, this.x - gridSize / 2 - scroll, this.y - gridSize, gridSize, gridSize)
+    ctx.drawImage(image, this.x - gridSize / 2, this.y - gridSize, gridSize, gridSize)
     
     // todo draw the logical position
     ctx.fillStyle = 'red'
     ctx.beginPath()
-    ctx.arc(this.x - scroll, this.y, 3, 0, 2 * Math.PI)
+    ctx.arc(this.x, this.y, 3, 0, 2 * Math.PI)
     ctx.fill()
   }
 }

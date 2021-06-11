@@ -22,12 +22,6 @@ class Ground {
     return above && between
   }
 
-  isBellow(x,y) {
-    let bellow = this.y + this.height <= y
-    let between = (this.x <= x + gridSize/2 && this.x >= this.x - gridSize/2) || (this.x + this.width >= x - gridSize/2 && this.x + this.width <= x + gridSize/2)
-    return bellow && between 
-  }
-
   contains(x, y) {
     let between = (this.x <= x + gridSize/2 && this.x >= this.x - gridSize/2) || (this.x + this.width >= x - gridSize/2 && this.x + this.width <= x + gridSize/2)
     let betweenY = (this.y <= y && this.y >= y - gridSize) || (this.y + this.height <= y || this.y + this.height >= y - gridSize)
@@ -41,11 +35,12 @@ class Ground {
         imageGround = groundTopSprite.image
       }
       for (let col = 0; col < this.width; col += gridSize) {
-        ctx.drawImage(imageGround, this.x + col - scroll, this.y + row, gridSize, gridSize)
+        ctx.drawImage(imageGround, this.x + col, this.y + row, gridSize, gridSize)
       }
     }
     let imageGround = groundSprite.image
+    ctx.drawImage(imageGround, 0, 400, gridSize, gridSize)
     ctx.strokeStyle = 'darkgreen'
-    ctx.strokeRect(this.x - scroll, this.y, this.width, this.height)
+    ctx.strokeRect(this.x, this.y, this.width, this.height)
   }
 }
