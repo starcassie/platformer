@@ -44,9 +44,7 @@ class Hero {
     // todo check if hero hits ground
     let ground = canvas.height
     if (this.y > ground) {
-      this.airborne = false
-      this.dy = 0
-      this.y = ground
+      this.reset()
     }
 
     let hitP = false
