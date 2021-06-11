@@ -1,5 +1,6 @@
 // game.js file
 
+let scroll = 0
 let hero = new Hero()
 
 let platforms = [
@@ -7,6 +8,9 @@ let platforms = [
   new Ground(8, 5, 2, 1),
   new Ground(12, 7, 6, 1),
   new Ground(22, 6, 4, 1),
+  new Ground(25, 8, 5, 1),
+  new Ground(30, 5, 4, 2),
+  new Ground(35, 7, 18, 2)
 ]
 
 let keyPressed = {}
@@ -28,6 +32,8 @@ function loop() {
   } // this was the fix!
   if (keyPressed['ArrowRight']) {
     hero.moveRight()
+  } if (keyPressed['KeyV']) {
+    hero.speedDrop()
   }
 
   hero.step(platforms)
@@ -37,7 +43,7 @@ function loop() {
   hero.draw()
   platforms.forEach(ground => ground.draw())
 
-  setTimeout(() => loop(), 100)
+  setTimeout(() => loop(), 50)
 }
 
 // wait for images to load
@@ -48,6 +54,7 @@ async function loadGame() {
   await heroWalkSprite2.loaded
   await groundSprite.loaded
   await groundTopSprite.loaded
+  await rockSprite.loaded
   loop()
 }
 loadGame()

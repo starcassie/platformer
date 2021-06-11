@@ -24,6 +24,7 @@ let heroWalkSprite1 = loadSprite('hero_walk1.png')
 let heroWalkSprite2 = loadSprite('hero_walk2.png')
 let groundSprite = loadSprite('ground.png')
 let groundTopSprite = loadSprite('ground_top.png')
+let rockSprite =loadSprite('rock.png')
 
 // draw helpers
 function erase() {
