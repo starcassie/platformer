@@ -1,5 +1,6 @@
 // game.js file
 
+let scroll = 0
 let hero = new Hero()
 
 let platforms = [
