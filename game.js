@@ -54,7 +54,7 @@ async function loadGame() {
   await heroWalkSprite2.loaded
   await groundSprite.loaded
   await groundTopSprite.loaded
-  await rockSprite.loaded
+  // await rockSprite.loaded
   loop()
 }
 loadGame()
